@@ -1,11 +1,11 @@
-import React, { Suspense } from 'react'
+import { Suspense } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 import { ReactNode, FC, memo } from 'react'
 
 interface IProps {
   children?: ReactNode
 }
-const Discover: FC<IProps> = (props) => {
+const Discover: FC<IProps> = () => {
   return (
     <div className='discover'>
       <div className="nav">

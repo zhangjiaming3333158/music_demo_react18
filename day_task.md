@@ -62,6 +62,7 @@ module.exports = {
 ```zsh
 npm i @type/node
 ```
+
 ```ts
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
@@ -418,6 +419,130 @@ export default App
 
 ## 12 Redux状态管理配置
 
+### 12.1 安装
+
 ```zsh
+npm i redux react-redux @reduxjs/toolkit --save
+```
+
+### 12.2 配置store
+
+```tsx
+import { configureStore } from '@reduxjs/toolkit'
+import counterReducer from './count' // 从 src/store/count.ts 导入 reducer
+const store = configureStore({
+  reducer: {
+    count: counterReducer, // 将 countReducer 作为 count slice 的 reducer
+  },
+})
+// 从 store 本身推断 `RootState` 和 `AppDispatch` 类型
+export type RootState = ReturnType<typeof store.getState>
+// 推断类型：{posts: PostsState, comments: CommentsState, users: UsersState}
+export type AppDispatch = typeof store.dispatch
+export default store // 导出 store
+```
+
+### 12.3 配置count.ts
+
+```tsx
+import { createSlice, PayloadAction } from '@reduxjs/toolkit' //
+import type { RootState } from '@/store'
+// 定义 slice state 的类型
+interface CounterState {
+  value: number
+}
+// 使用该类型定义初始 state
+const initialState: CounterState = {
+  value: 0,
+}
+export const counterSlice = createSlice({
+  name: 'counter',
+  // `createSlice` 将从 `initialState` 参数推断 state 类型
+  initialState,
+  reducers: {
+    increment: (state) => {
+      state.value += 1
+    },
+    decrement: (state) => {
+      state.value -= 1
+    },
+    // 使用 PayloadAction 类型声明 `action.payload` 的内容
+    incrementByAmount: (state, action: PayloadAction<number>) => {
+      state.value += action.payload
+    },
+  },
+})
+export const { increment, decrement, incrementByAmount } = counterSlice.actions
+// selectors 等其他代码可以使用导入的 `RootState` 类型
+export const selectCount = (state: RootState) => state.count.value
+export default counterSlice.reducer
+```
+
+### 12.4 配置main.tsx
+
+```tsx
+<Provider store={store}>...</Provider>
+```
+
+### 12.5 配置组件
+
+```tsx
+import { useState, ReactNode, FC, memo } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import {
+  decrement,
+  increment,
+  incrementByAmount,
+  selectCount,
+} from '@/store/count'// 引入count模块
+import styles from './index.module.scss'
+interface IProps {
+  children?: ReactNode
+}
+const recommend: FC<IProps> = () => {
+  const count = useSelector(selectCount)// 获取count模块的值
+  const dispatch = useDispatch()// 获取dispatch方法
+  const [incrementAmount, setIncrementAmount] = useState('2')// 设置incrementAmount的值
+  return (
+    <div>
+      <div className={styles.row}>
+        <button
+          className={styles.button}
+          aria-label="Increment value"
+          onClick={() => dispatch(increment())}// 调用dispatch方法
+        >
+          +
+        </button>
+        <span className={styles.value}>{count}</span>
+        <button
+          className={styles.button}
+          aria-label="Decrement value"
+          onClick={() => dispatch(decrement())}
+        >
+          -
+        </button>
+      </div>
+      <div className={styles.row}>
+        <input
+          className={styles.textbox}
+          aria-label="Set increment amount"
+          value={incrementAmount}
+          onChange={(e) => setIncrementAmount(e.target.value)}
+        />
+        <button
+          className={styles.button}
+          onClick={() =>
+            dispatch(incrementByAmount(Number(incrementAmount) || 0))
+          }
+        >
+          Add Amount
+        </button>
+      </div>
+    </div>
+  )
+}
+export default memo(recommend)
 
 ```
+
+## 13
