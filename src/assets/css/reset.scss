@@ -114,6 +114,7 @@ section {
 body {
   line-height: 1;
 }
+li,
 menu,
 ol,
 ul {
@@ -133,4 +134,38 @@ q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #666;
+}
+
+a:hover {
+  color: #666;
+  text-decoration: underline;
+}
+
+i,
+em {
+  font-style: normal;
+}
+
+input,
+textarea,
+button,
+select,
+a {
+  outline: none;
+  border: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+img {
+  border: none;
+  vertical-align: middle;
 }

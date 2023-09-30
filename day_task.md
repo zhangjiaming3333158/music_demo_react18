@@ -296,7 +296,6 @@ function App() {
   )
 }
 export default App
-
 ```
 
 ## 8 组件类型约束
@@ -555,3 +554,16 @@ npm i axios
 ```
 
 配置service
+
+## 17 process.env讲解配置
+
+```tsx
+// .env
+VITE_APP_BASE_URL=http://localhost:3000
+```
+
+```tsx
+// .env.prod
+VITE_APP_BASE_URL=http://localhost:3000
+```
+

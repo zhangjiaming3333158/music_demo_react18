@@ -6,9 +6,9 @@ export const TIME_OUT = 10000
 // console.log(process.env.NODE_ENV)
 // let BASE_URL = ''
 // if (process.env.NODE_ENV === 'development') {
-//   BASE_URL = 'http://codercba.dev:9002'
+//   BASE_URL = 'http://localhost:3000'
 // } else {
-//   BASE_URL = 'http://codercba.prod:9002'
+//   BASE_URL = 'https://music-erkelost.vercel.app/'
 // }
 
 // export { BASE_URL }
