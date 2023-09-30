@@ -253,13 +253,13 @@ npm i -D craco-less
 
 ```jsx
 import React from 'react'
-import { createBrowserRouter } from 'react-router-dom'
+import type { RouteObject } from 'react-router-dom'
 
 import A from '@/views/A'
 import App from '@/App'
 import ErrorPage from '@/views/Error'
 
-const routes = [
+const routes: RouteObject[] = [
   {
     path: '/',
     element: <App />,
@@ -272,26 +272,30 @@ const routes = [
   },
 ]
 
-export default createBrowserRouter(routes)
+export default routes
 ```
 
-### 2. index.tsx配置
+### 2. App.tsx配置
 
 ```jsx
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { RouterProvider } from 'react-router-dom'
-
+import { Suspense } from 'react'
+import { Link, useRoutes } from 'react-router-dom'
 import routes from './router'
-import './assets/css/index.less'
-import 'normalize.css'
-
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
-root.render(
-  <React.StrictMode>
-    <RouterProvider router={routes} />
-  </React.StrictMode>,
-)
+function App() {
+  return (
+    <div className="App">
+      <div className="nav">
+        <Link to="...">...</Link>
+      </div>
+      <div className="content">
+        <Suspense fallback="loading">
+          <div className="router">{useRoutes(routes)}</div>
+        </Suspense>
+      </div>
+    </div>
+  )
+}
+export default App
 
 ```
 
@@ -417,7 +421,7 @@ export default App
 
 ## 11 discover页面子路由
 
-## 12 Redux状态管理配置
+## 12-14 Redux状态管理配置
 
 ### 12.1 安装
 
@@ -494,22 +498,22 @@ import {
   increment,
   incrementByAmount,
   selectCount,
-} from '@/store/count'// 引入count模块
+} from '@/store/count' // 引入count模块
 import styles from './index.module.scss'
 interface IProps {
   children?: ReactNode
 }
 const recommend: FC<IProps> = () => {
-  const count = useSelector(selectCount)// 获取count模块的值
-  const dispatch = useDispatch()// 获取dispatch方法
-  const [incrementAmount, setIncrementAmount] = useState('2')// 设置incrementAmount的值
+  const count = useSelector(selectCount) // 获取count模块的值
+  const dispatch = useDispatch() // 获取dispatch方法
+  const [incrementAmount, setIncrementAmount] = useState('2') // 设置incrementAmount的值
   return (
     <div>
       <div className={styles.row}>
         <button
           className={styles.button}
           aria-label="Increment value"
-          onClick={() => dispatch(increment())}// 调用dispatch方法
+          onClick={() => dispatch(increment())} // 调用dispatch方法
         >
           +
         </button>
@@ -542,7 +546,12 @@ const recommend: FC<IProps> = () => {
   )
 }
 export default memo(recommend)
-
 ```
 
-## 13
+## 16 网络请求配置axios
+
+```zsh
+npm i axios
+```
+
+配置service

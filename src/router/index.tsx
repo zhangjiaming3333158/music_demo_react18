@@ -1,83 +1,70 @@
 import { lazy } from 'react'
-import { createBrowserRouter, Navigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
+import type { RouteObject } from 'react-router-dom'
 
-import ErrorPage from '@/views/Error'
-import App from '@/App'
 const Discover = lazy(() => import('@/views/Discover'))
+const Recommend = lazy(() => import('@/views/Discover/c-views/recommend'))
+const Ranking = lazy(() => import('@/views/Discover/c-views/ranking'))
+const Songs = lazy(() => import('@/views/Discover/c-views/songs'))
+const Djradio = lazy(() => import('@/views/Discover/c-views/djradio'))
+const Artist = lazy(() => import('@/views/Discover/c-views/artist'))
+const Album = lazy(() => import('@/views/Discover/c-views/album'))
+
 const Mine = lazy(() => import('@/views/Mine'))
 const Focus = lazy(() => import('@/views/Focus'))
 const Download = lazy(() => import('@/views/Download'))
 
-//discover子路由
-const Album = lazy(() => import('@/views/Discover/c-views/album'))
-const Artist = lazy(() => import('@/views/Discover/c-views/artist'))
-const Djradio = lazy(() => import('@/views/Discover/c-views/djradio'))
-const Recommend = lazy(() => import('@/views/Discover/c-views/recommend'))
-const Songs = lazy(() => import('@/views/Discover/c-views/songs'))
-const Toplist = lazy(() => import('@/views/Discover/c-views/toplist'))
-
-const routes = [
+const routes: RouteObject[] = [
   {
     path: '/',
-    element: <App />,
+    element: <Navigate to="/discover" />
+  },
+  {
+    path: '/discover',
+    element: <Discover />,
     children: [
       {
-        errorElement: <ErrorPage />,
-        children: [
-          {
-            path: '/',
-            element: <Navigate to="discover" />,
-          },
-          {
-            path: 'discover',
-            element: <Discover />,
-            children: [
-              {
-                path: '/discover',
-                element: <Navigate to="recommend" />,
-              },
-              {
-                path: 'album',
-                element: <Album />,
-              },
-              {
-                path: 'artist',
-                element: <Artist />,
-              },
-              {
-                path: 'djradio',
-                element: <Djradio />,
-              },
-              {
-                path: 'recommend',
-                element: <Recommend />,
-              },
-              {
-                path: 'songs',
-                element: <Songs />,
-              },
-              {
-                path: 'toplist',
-                element: <Toplist />,
-              },
-            ],
-          },
-          {
-            path: 'download',
-            element: <Download />,
-          },
-          {
-            path: 'focus',
-            element: <Focus />,
-          },
-          {
-            path: 'mine',
-            element: <Mine />,
-          },
-        ],
+        path: '/discover',
+        element: <Navigate to="/discover/recommend" />
       },
-    ],
+      {
+        path: '/discover/recommend',
+        element: <Recommend />
+      },
+      {
+        path: '/discover/ranking',
+        element: <Ranking />
+      },
+      {
+        path: '/discover/songs',
+        element: <Songs />
+      },
+      {
+        path: '/discover/djradio',
+        element: <Djradio />
+      },
+      {
+        path: '/discover/artist',
+        element: <Artist />
+      },
+      {
+        path: '/discover/album',
+        element: <Album />
+      }
+    ]
   },
+  {
+    path: '/mine',
+    element: <Mine />
+  },
+  {
+    path: '/focus',
+    element: <Focus />
+  },
+  {
+    path: '/download',
+    element: <Download />
+  }
 ]
 
-export default createBrowserRouter(routes)
+export default routes

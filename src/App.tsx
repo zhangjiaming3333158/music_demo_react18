@@ -1,5 +1,7 @@
 import { Suspense } from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, useRoutes } from 'react-router-dom'
+
+import routes from './router'
 
 function App() {
   return (
@@ -12,7 +14,8 @@ function App() {
       </div>
       <div className="content">
         <Suspense fallback="loading">
-          <Outlet />
+          {/* <RouterProvider router={routes} /> */}
+          <div className="router">{useRoutes(routes)}</div>
         </Suspense>
       </div>
     </div>

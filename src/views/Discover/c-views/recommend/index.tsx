@@ -5,6 +5,7 @@ import {
   increment,
   incrementByAmount,
   selectCount,
+  AllCount
 } from '@/store/count'// 引入count模块
 import styles from './index.module.scss'
 
@@ -13,6 +14,7 @@ interface IProps {
 }
 const recommend: FC<IProps> = () => {
   const count = useSelector(selectCount)// 获取count模块的值
+  const all = useSelector(AllCount)// 获取count模块的initialState
   const dispatch = useDispatch()// 获取dispatch方法
   const [incrementAmount, setIncrementAmount] = useState('2')// 设置incrementAmount的值
 

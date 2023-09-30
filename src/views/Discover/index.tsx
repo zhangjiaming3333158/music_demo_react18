@@ -10,7 +10,7 @@ const Discover: FC<IProps> = () => {
     <div className='discover'>
       <div className="nav">
         <Link to="recommend">推荐</Link>
-        <Link to="toplist">排行榜</Link>
+        <Link to="ranking">排行榜</Link>
         <Link to="songs">歌单</Link>
         <Link to="djradio">主播电台</Link>
         <Link to="artist">歌手</Link>
