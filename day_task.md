@@ -567,8 +567,39 @@ VITE_APP_BASE_URL=http://localhost:3000
 VITE_APP_BASE_URL=http://localhost:3000
 ```
 
-## 18 styled-components
+## 18 styled-components + theme
 
 ```zsh
 npm i styled-components -D
+```
+
+```tsx
+// main.tsx
+import { ThemeProvider } from 'styled-components'
+import theme from './assets/theme'
+
+<ThemeProvider theme={theme}>
+  <HashRouter>
+    <App />
+  </HashRouter>
+</ThemeProvider>
+```
+
+```tsx
+// theme.ts
+const theme = {
+  color: {
+    primary: '#C20C0C',
+    secondary: ''
+  },
+  size: {},
+  mixin: {
+    wrapv1: `
+      width: 1100px;
+      margin: 0 auto;
+    `
+  }
+}
+
+export default theme
 ```
