@@ -567,3 +567,8 @@ VITE_APP_BASE_URL=http://localhost:3000
 VITE_APP_BASE_URL=http://localhost:3000
 ```
 
+## 18 styled-components
+
+```zsh
+npm i styled-components -D
+```
