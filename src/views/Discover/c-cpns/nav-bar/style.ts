@@ -6,7 +6,7 @@ export const NavWrapper = styled.div`
 
   .nav {
     display: flex;
-    padding-left: 180px;
+    padding-left: 352px;
     position: relative;
     top: -4px;
 

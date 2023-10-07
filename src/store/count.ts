@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';//
-import type { RootState } from '@/store';
+import type { IRootState } from '@/store';
 
 // 定义 slice state 的类型
 interface CounterState {
@@ -31,8 +31,8 @@ export const counterSlice = createSlice({
 
 export const { increment, decrement, incrementByAmount } = counterSlice.actions;
 
-// selectors 等其他代码可以使用导入的 `RootState` 类型
-export const selectCount = (state: RootState) => state.count.value;
-export const AllCount = (state: RootState) => state.count;
+// selectors 等其他代码可以使用导入的 `IRootState` 类型
+export const selectCount = (state: IRootState) => state.count.value;
+export const AllCount = (state: IRootState) => state.count;
 
 export default counterSlice.reducer;

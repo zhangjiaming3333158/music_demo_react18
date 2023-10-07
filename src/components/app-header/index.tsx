@@ -20,14 +20,9 @@ const AppHeader: FC<IProps> = () => {
           <div className="title-list">
             {routes
               .filter((route: { title: any }) => route.title)
-              .map(({ path, title }) => (
+              .map(({ path, title }: { path: string; title: string }) => (
                 <div className="item" key={path}>
-                  <NavLink
-                    to={path}
-                    className={({ isActive }) => {
-                      return isActive ? 'active' : undefined
-                    }}
-                  >
+                  <NavLink to={path}>
                     {title}
                     <i className="icon sprite_01"></i>
                   </NavLink>
