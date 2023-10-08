@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { useMusicDispatch } from '@/store'
 import { fetchBannerDataAction } from '@/store/modules/recommend'
 
-import TopBanner from './c-cpns/top-banners'
+import TopBanner from './c-cpns/topBanners/top-banners'
 interface IProps {
   children?: ReactNode
 }
