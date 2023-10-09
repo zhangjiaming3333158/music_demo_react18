@@ -6,6 +6,15 @@ export function getBanners() {
   })
 }
 
+export function getHotRecommend(limit = 30) {
+  return request.get({
+    url: '/personalized',
+    params: {
+      limit
+    }
+  })
+}
+
 export function getRecommendSongs() {
   return request.get({
     url: '/recommend/songs'
