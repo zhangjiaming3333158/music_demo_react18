@@ -1,12 +1,16 @@
 import { ReactNode, FC, memo } from 'react'
 import { useEffect } from 'react'
 import { useMusicDispatch } from '@/store'
-import { fetchBannerDataAction } from '@/store/modules/recommend'
+import {
+  fetchBannerDataAction,
+  fetchRecommendSongsDataAction,
+} from '@/store/modules/recommend'
+
 import { Card } from 'antd'
 
-import TopBanner from './c-cpns/topBanners/top-banners'
+import TopBanner from './c-cpns/topBanners'
 import HotRecommend from './c-cpns/HotRecommend'
-import AreaHeaderV1 from '@/components/area-header-v1'
+import NewAlbum from './c-cpns/NewAlbum'
 import { RecommendWrapper } from './style'
 
 interface IProps {
@@ -17,34 +21,16 @@ const recommend: FC<IProps> = () => {
   const dispatch = useMusicDispatch()
   useEffect(() => {
     dispatch(fetchBannerDataAction())
+    dispatch(fetchRecommendSongsDataAction())
   }, [])
   return (
     <RecommendWrapper>
       <TopBanner />
       <div className="content wrap-v2">
         <div className="left">
-          <Card
-            title={
-              <AreaHeaderV1
-                title="热门推荐"
-                keywords={['华语', '流行', '摇滚', '民谣', '电子']}
-                moreLink="/discover/songs"
-              />
-            }
-            bordered={false}
-            style={{ width: 709 }}
-          >
-            <p>Card content</p>
-            <p>Card content</p>
-            <p>Card content</p>
-            <p>Card content</p>
-            <p>Card content</p>
-            <p>Card content</p>
-            <p>Card content</p>
-          </Card>
           <HotRecommend />
+          <NewAlbum />
           left
-          {/* <NewAlbum /> */}
           {/* <TopRanking /> */}
         </div>
         <div className="right">

@@ -6,7 +6,7 @@ export function getBanners() {
   })
 }
 
-export function getHotRecommend(limit = 30) {
+export function getRecommendSongs(limit = 8) {
   return request.get({
     url: '/personalized',
     params: {
@@ -15,16 +15,16 @@ export function getHotRecommend(limit = 30) {
   })
 }
 
-export function getRecommendSongs() {
-  return request.get({
-    url: '/recommend/songs'
-  })
-}
+// export function getRecommendSongs() {
+//   return request.get({
+//     url: '/recommend/songs'
+//   })
+// }
 
 // 可获得每日推荐歌单 ( 需要登录 )
-export function getSongListDay() {
+export function getNewAlbum() {
   return request.get({
-    url: '/recommend/resource'
+    url: '/album/newest'
   })
 }
 

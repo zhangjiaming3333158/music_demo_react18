@@ -1,55 +1,70 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { getBanners, getRecommendSongs, getSongListDay } from '@/service/modules/recommend'
+// 1.导入接口
+import {
+  getBanners,
+  getRecommendSongs,
+  getNewAlbum,
+} from '@/service/modules/recommend'
+
+// 2.定义接口返回类型
 interface IRecommendState {
   banners: []
-  // recommendSongs: any
-  // recommendSongList: []
+  recommendSongs: []
+  recommendSongList: []
 }
 
+// 3.定义初始值
 const initialState: IRecommendState = {
   banners: [],
-  // recommendSongs: {},
-  // recommendSongList: []
+  recommendSongs: [],
+  recommendSongList: [],
 }
+
 const recommendSlice = createSlice({
   name: 'recommend',
   initialState,
+  // 5.定义reducers->set
   reducers: {
     setBannerData(state, { payload }) {
       state.banners = payload
     },
-    // setRecommendSongsData(state, { payload }) {
-    //   state.recommendSongs = payload
-    // },
-    // setRecommendSongListData (state, {  payload }) {
-    //   state.recommendSongList = payload
-    // }
-  }
+    setRecommendSongsData(state, { payload }) {
+      state.recommendSongs = payload
+    },
+    setNewAlbumData(state, { payload }) {
+      state.recommendSongList = payload
+    },
+  },
 })
+// 6.定义异步actions
 export const fetchBannerDataAction = createAsyncThunk(
   'banners',
-  async (args, { dispatch }) => {
+  async (arg, { dispatch }) => {
     const res = await getBanners()
     dispatch(setBannerData(res.banners))
-  }
+  },
 )
 
-// export const fetchRecommendSongsDataAction = createAsyncThunk(
-//   'recommendSongSlice',
-//   async (arg, { getState, dispatch }) => {
-//     const res = await getRecommendSongs()
-//     dispatch(setRecommendSongsData(res.data))
-//   }
-// )
+export const fetchRecommendSongsDataAction = createAsyncThunk(
+  'recommendSongSlice',
+  async (arg, { dispatch }) => {
+    const res = await getRecommendSongs(8)
+    dispatch(setRecommendSongsData(res.result))
+  },
+)
 
-// export const fetchRecommendSongListDataAction = createAsyncThunk(
-//   'recommendSongListSlice',
-//   async (arg, { getState, dispatch }) => {
-//     const res = await getSongListDay()
-//     dispatch(setRecommendSongListData(res.recommend))
-//   }
-// )
+export const fetchNewAlbumDataAction = createAsyncThunk(
+  'recommendSongs',
+  async (arg, { dispatch }) => {
+    const res = await getNewAlbum()
+    dispatch(setNewAlbumData(res.recommend))
+  },
+)
 
-// setRecommendSongsData, setRecommendSongListData
-export const { setBannerData } = recommendSlice.actions
+// 7.导出actions
+export const {
+  setBannerData,
+  setRecommendSongsData,
+  setNewAlbumData,
+} = recommendSlice.actions
 export default recommendSlice.reducer
