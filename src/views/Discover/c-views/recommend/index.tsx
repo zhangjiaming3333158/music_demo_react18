@@ -4,12 +4,14 @@ import { useMusicDispatch } from '@/store'
 import {
   fetchBannerDataAction,
   fetchRecommendSongsDataAction,
+  fetchNewAlbumDataAction,
 } from '@/store/modules/recommend'
 
 import { Card } from 'antd'
 
 import TopBanner from './c-cpns/topBanners'
 import HotRecommend from './c-cpns/HotRecommend'
+import TopRanking from './c-cpns/TopRanking'
 import NewAlbum from './c-cpns/NewAlbum'
 import { RecommendWrapper } from './style'
 
@@ -22,6 +24,7 @@ const recommend: FC<IProps> = () => {
   useEffect(() => {
     dispatch(fetchBannerDataAction())
     dispatch(fetchRecommendSongsDataAction())
+    dispatch(fetchNewAlbumDataAction())
   }, [])
   return (
     <RecommendWrapper>
@@ -30,8 +33,7 @@ const recommend: FC<IProps> = () => {
         <div className="left">
           <HotRecommend />
           <NewAlbum />
-          left
-          {/* <TopRanking /> */}
+          <TopRanking />
         </div>
         <div className="right">
           <Card title="Card title" bordered={false} style={{ width: 250 }}>

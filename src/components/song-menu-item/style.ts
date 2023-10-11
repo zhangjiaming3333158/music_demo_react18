@@ -6,6 +6,12 @@ export const MenuItemWrapper = styled.div`
 
   .top {
     position: relative;
+    cursor: pointer;
+    border-radius: 5px;
+
+    &:hover {
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
 
     & > img {
       width: 140px;
@@ -22,16 +28,18 @@ export const MenuItemWrapper = styled.div`
       background-position: 0 0;
 
       .info {
+        box-sizing: border-box;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         align-items: center;
         position: absolute;
+        padding: 0 10px;
         bottom: 0;
         left: 0;
-        /* right: 0; */
+        border-radius: 0 0 5px 5px;
         width: 100%;
         height: 27px;
-        background-color: rgba(0, 0, 0, .4);
+        background-color: rgba(0, 0, 0, 0.4);
 
         .headset {
           margin-right: 5px;
@@ -41,7 +49,7 @@ export const MenuItemWrapper = styled.div`
           background-position: 0 -24px;
         }
 
-        .count{
+        .count {
           color: #fff;
           font-size: 13px;
         }

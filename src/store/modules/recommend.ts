@@ -57,7 +57,7 @@ export const fetchNewAlbumDataAction = createAsyncThunk(
   'recommendSongs',
   async (arg, { dispatch }) => {
     const res = await getNewAlbum()
-    dispatch(setNewAlbumData(res.recommend))
+    dispatch(setNewAlbumData(res.albums))
   },
 )
 

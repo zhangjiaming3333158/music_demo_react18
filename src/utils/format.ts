@@ -1,5 +1,7 @@
 export function formatCount(count: number) {
-  if (count > 100000) {
+  if (count > 1e8) {
+    return Math.floor(count / 1e8) + '亿'
+  } else if (count > 10000) {
     return Math.floor(count / 10000) + '万'
   } else {
     return count
@@ -9,7 +11,7 @@ export function formatCount(count: number) {
 export function getImageSize(
   imageUrl: string,
   width: number,
-  height: number = width
+  height: number = width,
 ) {
   return imageUrl + `?param=${width}y${height}`
 }

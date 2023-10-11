@@ -1,11 +1,13 @@
 import request from '@/service'
 
+// 获取轮播图
 export function getBanners() {
   return request.get({
     url: '/banner'
   })
 }
 
+// 获取推荐歌单
 export function getRecommendSongs(limit = 8) {
   return request.get({
     url: '/personalized',
@@ -15,13 +17,7 @@ export function getRecommendSongs(limit = 8) {
   })
 }
 
-// export function getRecommendSongs() {
-//   return request.get({
-//     url: '/recommend/songs'
-//   })
-// }
-
-// 可获得每日推荐歌单 ( 需要登录 )
+// 获取新碟上架
 export function getNewAlbum() {
   return request.get({
     url: '/album/newest'
