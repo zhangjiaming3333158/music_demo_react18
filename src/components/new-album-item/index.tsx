@@ -13,7 +13,7 @@ const NewAlbumItem: FC<IProps> = (props) => {
 
   return (
     <AlbumItemWrapper>
-      <div className="top">
+      <div className="top cover">
         <img src={getImageSize(itemData.picUrl, 100)} alt="" />
         {/* <a href="" className="cover sprite_cover"></a> */}
       </div>

@@ -5,6 +5,7 @@ import {
   fetchBannerDataAction,
   fetchRecommendSongsDataAction,
   fetchNewAlbumDataAction,
+  fetchRankingsDataAction,
 } from '@/store/modules/recommend'
 
 import { Card } from 'antd'
@@ -25,6 +26,7 @@ const recommend: FC<IProps> = () => {
     dispatch(fetchBannerDataAction())
     dispatch(fetchRecommendSongsDataAction())
     dispatch(fetchNewAlbumDataAction())
+    dispatch(fetchRankingsDataAction())
   }, [])
   return (
     <RecommendWrapper>

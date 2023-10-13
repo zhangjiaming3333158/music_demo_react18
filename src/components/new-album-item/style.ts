@@ -4,14 +4,24 @@ export const AlbumItemWrapper = styled.div`
   .top {
     position: relative;
     width: 130px;
-    height: 130px;
+    height: 120px;
     overflow: hidden;
     border-radius: 5px;
 
     img {
-      width: 130px;
-      height: 130px;
+      width: 120px;
+      height: 120px;
       border-radius: 5px;
+    }
+
+    .cover {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background-position: 0 -570px;
+      text-indent: -9999px;
     }
   }
 

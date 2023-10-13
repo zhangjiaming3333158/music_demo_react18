@@ -24,23 +24,12 @@ export function getNewAlbum() {
   })
 }
 
-// 推荐歌单分类
-export function getRecommendSongsCategory() {
+// 获取榜单
+export function getPlaylistDetail(id: number) {
   return request.get({
-    url: '/playlist/hot'
+    url: '/playlist/detail',
+    params: {
+      id
+    }
   })
-}
-
-
-// 调用此接口,可获取歌单分类,包含 category 信息
-export function getHotCategory () {
-  return request.get({
-    url: '/playlist/hot'
-  })
-}
-
-
-// 调用此接口 , 可获取网友精选碟歌单
-export function getSongList () {
-  
 }
