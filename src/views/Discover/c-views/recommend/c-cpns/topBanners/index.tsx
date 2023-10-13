@@ -47,7 +47,7 @@ const TopBanners: FC<IProps> = () => {
         <BannerLeft>
           <Carousel
             autoplay
-            dots={false}
+            dots={true}
             autoplaySpeed={5000}
             effect="fade"
             ref={bannerRef}
@@ -65,7 +65,7 @@ const TopBanners: FC<IProps> = () => {
               )
             })}
           </Carousel>
-          <ul className="dots">
+          {/* <ul className="dots">
             {banners.map(
               (
                 item: { imageUrl: string; typeTitle: string },
@@ -82,7 +82,7 @@ const TopBanners: FC<IProps> = () => {
                 )
               },
             )}
-          </ul>
+          </ul> */}
         </BannerLeft>
         <BannerRight>
           <User />
