@@ -6,14 +6,16 @@ import {
   fetchRecommendSongsDataAction,
   fetchNewAlbumDataAction,
   fetchRankingsDataAction,
+  fetchArtistListDataAction,
+  fetchAnchorListDataAction,
 } from '@/store/modules/recommend'
-
-import { Card } from 'antd'
 
 import TopBanner from './c-cpns/topBanners'
 import HotRecommend from './c-cpns/HotRecommend'
 import TopRanking from './c-cpns/TopRanking'
 import NewAlbum from './c-cpns/NewAlbum'
+import SettleSinger from './c-cpns/SettleSinger'
+import HotAnchor from './c-cpns/HotAnchor'
 import { RecommendWrapper } from './style'
 
 interface IProps {
@@ -27,6 +29,8 @@ const recommend: FC<IProps> = () => {
     dispatch(fetchRecommendSongsDataAction())
     dispatch(fetchNewAlbumDataAction())
     dispatch(fetchRankingsDataAction())
+    dispatch(fetchArtistListDataAction())
+    dispatch(fetchAnchorListDataAction())
   }, [])
   return (
     <RecommendWrapper>
@@ -38,19 +42,8 @@ const recommend: FC<IProps> = () => {
           <TopRanking />
         </div>
         <div className="right">
-          <Card title="Card title" bordered={false} style={{ width: 250 }}>
-            <p>Card content</p>
-            <p>Card content</p>
-            <p>Card content</p>
-            <p>Card content</p>
-            <p>Card content</p>
-            <p>Card content</p>
-            <p>Card content</p>
-          </Card>
-          right
-          {/* <UserLogin /> */}
-          {/* <SettleSinger /> */}
-          {/* <HotAnchor /> */}
+          <SettleSinger />
+          <HotAnchor />
         </div>
       </div>
     </RecommendWrapper>

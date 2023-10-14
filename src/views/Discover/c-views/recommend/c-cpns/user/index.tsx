@@ -2,7 +2,12 @@ import { memo } from 'react'
 import type { FC, ReactNode } from 'react'
 import { UserWrapper } from './style'
 // import { Avatar, Button, IconButton, Skeleton } from '@mui/material'
-import { GithubOutlined } from '@ant-design/icons'
+import {
+  PlayCircleFilled,
+  MessageFilled,
+  VideoCameraFilled,
+  ClockCircleFilled,
+} from '@ant-design/icons'
 import { Button } from 'antd'
 interface IProps {
   children?: ReactNode
@@ -31,14 +36,24 @@ const User: FC<IProps> = () => {
         {UserList.map((item) => {
           return (
             <div className="item" key={item.title}>
-              {/* <IconButton>{item.component}</IconButton> */}
-              <GithubOutlined />
+              {item.title === '免费观看高清视频' && (
+                <VideoCameraFilled style={{ marginRight: 10 }} />
+              )}
+              {item.title === '多端同步播放记录' && (
+                <ClockCircleFilled style={{ marginRight: 10 }} />
+              )}
+              {item.title === '发表弹幕/评论' && (
+                <MessageFilled style={{ marginRight: 10 }} />
+              )}
+              {item.title === '热门番剧影视看不停' && (
+                <PlayCircleFilled style={{ marginRight: 10 }} />
+              )}
               <div>{item.title}</div>
             </div>
           )
         })}
       </div>
-      <div className='button'>
+      <div className="button">
         <Button type="primary">立即登录</Button>
       </div>
 

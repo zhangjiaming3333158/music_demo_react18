@@ -7,21 +7,23 @@ export const UserWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   font-size: 12px;
-  padding: 16px 22.5px;
+  padding: 10px 22.5px;
   background-color: #eeeeee30;
   backdrop-filter: blur(500px);
   color: #eee;
   .title {
     flex: 1;
-    font-size: 12px;
+    font-size: 15px;
     line-height: 19px;
   }
   .content {
     flex: 3;
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
     gap: 10px;
     .item {
+      margin-left: 10px;
       flex: 1;
       display: flex;
       align-items: center;

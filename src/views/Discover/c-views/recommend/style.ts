@@ -13,6 +13,7 @@ export const RecommendWrapper = styled.div`
     }
 
     > .right {
+      /* position: fixed; */
       margin: 20px 0 40px 0;
       width: 250px;
     }

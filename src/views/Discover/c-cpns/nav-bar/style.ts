@@ -5,8 +5,10 @@ export const NavWrapper = styled.div`
   background-color: ${(props) => props.theme.color.primary};
 
   .nav {
+    margin: 0 auto;
     display: flex;
-    padding-left: 352px;
+    padding-left: 260px;
+    width: 1000px;
     position: relative;
     top: -4px;
 

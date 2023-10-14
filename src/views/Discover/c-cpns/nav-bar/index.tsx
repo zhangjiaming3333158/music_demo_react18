@@ -12,7 +12,7 @@ interface IProps {
 const NavBar: FC<IProps> = () => {
   return (
     <NavWrapper>
-      <div className="nav wrap-v1">
+      <div className="nav">
         {navRoute.map(
           (item: {
             path: string | number | Partial<Path> | null | undefined
