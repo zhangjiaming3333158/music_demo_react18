@@ -5,7 +5,7 @@ export const SingerWrapper = styled.div`
   .artists {
     .item {
       display: flex;
-      height: 65px;
+      height: 63px;
       margin-top: 15px;
       background-color: #fafafa;
       text-decoration: none;
@@ -15,8 +15,8 @@ export const SingerWrapper = styled.div`
       }
 
       img {
-        width: 65px;
-        height: 65px;
+        width: 63px;
+        height: 63px;
         border-top-left-radius: 5px;
         border-bottom-left-radius: 5px;
         /* object-fit: cover; */
@@ -52,7 +52,7 @@ export const SingerWrapper = styled.div`
   }
 
   .apply-for {
-    margin-top: 25px;
+    margin-top: 15px;
     a {
       color: #333;
       font-weight: 700;
