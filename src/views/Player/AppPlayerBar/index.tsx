@@ -2,7 +2,12 @@ import { memo, useState, useRef, useEffect } from 'react'
 import type { ReactNode, FC } from 'react'
 import { Link } from 'react-router-dom'
 import { useMusicSelector, shallowEqualMusic, useMusicDispatch } from '@/store'
-import { fetchCurrentSongAction } from '@/store/modules/player.ts'
+import {
+  changeLyricIndexAction,
+  changeMusicAction,
+  changePlayModeAction,
+  fetchCurrentSongAction,
+} from '@/store/modules/player.ts'
 import {
   BarControl,
   BarOperator,
@@ -15,7 +20,7 @@ import {
   PlayCircleTwoTone,
   PauseCircleTwoTone,
 } from '@ant-design/icons'
-import { Slider } from 'antd'
+import { Slider, message } from 'antd'
 import { formatTime, getImageSize } from '@/utils/format'
 import { getSongPlayUrl } from '@/utils/handle-player'
 
@@ -29,8 +34,6 @@ const AppPlayerBar: FC<IProps> = () => {
   const [duration, setDuration] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
   const [isSliding, setIsSliding] = useState(false)
-  //
-  // const [playMode, setPlayMode] = useState(0)
   const audioRef = useRef<HTMLAudioElement>(null)
 
   /** 发起action(获取数据) */
@@ -41,9 +44,12 @@ const AppPlayerBar: FC<IProps> = () => {
     dispatch(fetchCurrentSongAction(2084366052))
   }, [])
   /** 从redux中获取数据 */
-  const { currentSong } = useMusicSelector(
+  const { currentSong, lyrics, lyricIndex, playMode } = useMusicSelector(
     (state) => ({
       currentSong: state.player.currentSong,
+      lyrics: state.player.lyrics,
+      lyricIndex: state.player.lyricIndex,
+      playMode: state.player.playMode,
     }),
     shallowEqualMusic,
   )
@@ -78,6 +84,36 @@ const AppPlayerBar: FC<IProps> = () => {
       setProgress(progress)
       setCurrentTime(currentTime)
     }
+    // 3.根据当前的时间匹配对应的歌词
+    // currentTime/lyrics
+    let index = lyrics.length - 1
+    for (let i = 0; i < lyrics.length; i++) {
+      const lyric = lyrics[i]
+      if (lyric.time > currentTime) {
+        index = i - 1
+        break
+      }
+    }
+
+    // 4.匹配上对应的歌词的index
+    if (lyricIndex === index || index === -1) return
+    dispatch(changeLyricIndexAction(index))
+
+    // 5.展示对应的歌词
+    message.open({
+      content: lyrics[index].text,
+      key: 'lyric',
+      duration: 0,
+    })
+  }
+
+  function handleTimeEnded() {
+    if (playMode === 2) {
+      audioRef.current!.currentTime = 0
+      audioRef.current?.play()
+    } else {
+      handleChangeMusic(true)
+    }
   }
 
   /** 组件内部的事件处理 */
@@ -89,6 +125,16 @@ const AppPlayerBar: FC<IProps> = () => {
 
     // 2.改变isPlaying的状态
     setIsPlaying(!isPlaying)
+  }
+
+  function handleChangeMusic(isNext = true) {
+    dispatch(changeMusicAction(isNext))
+  }
+
+  function handleChangePlayMode() {
+    let newPlayMode = playMode + 1
+    if (newPlayMode > 2) newPlayMode = 0
+    dispatch(changePlayModeAction(newPlayMode))
   }
 
   function handleSliderChanging(value: number) {
@@ -120,19 +166,13 @@ const AppPlayerBar: FC<IProps> = () => {
     <PlayerBarWrapper>
       <div className="content wrap-v2">
         <BarControl>
-          <button
-            className="btn left"
-            // onClick={() => handleChangeMusic(false)}
-          >
+          <button className="btn left" onClick={() => handleChangeMusic(false)}>
             <LeftCircleTwoTone
               style={{ fontSize: '26px' }}
               twoToneColor="#c3473a"
             />
           </button>
-          <button
-            className="btn"
-            onClick={handlePlayBtnClick}
-          >
+          <button className="btn" onClick={handlePlayBtnClick}>
             {!isPlaying ? (
               <PlayCircleTwoTone
                 style={{ fontSize: '40px' }}
@@ -140,15 +180,12 @@ const AppPlayerBar: FC<IProps> = () => {
               />
             ) : (
               <PauseCircleTwoTone
-                style={{ fontSize: '40px'}}
+                style={{ fontSize: '40px' }}
                 twoToneColor="#c3473a"
               />
             )}
           </button>
-          <button
-            className="btn right"
-            // onClick={() => handleChangeMusic()}
-          >
+          <button className="btn right" onClick={() => handleChangeMusic()}>
             <RightCircleTwoTone
               style={{ fontSize: '26px' }}
               twoToneColor="#c3473a"
@@ -185,7 +222,7 @@ const AppPlayerBar: FC<IProps> = () => {
             </div>
           </div>
         </BarPlayerInfo>
-        <BarOperator $playmode={1}>
+        <BarOperator $playmode={playMode}>
           <div className="left">
             <button className="btn pip"></button>
             <button className="btn sprite_playbar favor"></button>
@@ -195,7 +232,7 @@ const AppPlayerBar: FC<IProps> = () => {
             <button className="btn sprite_playbar volume"></button>
             <button
               className="btn sprite_playbar loop"
-              // onClick={handleChangePlayMode}
+              onClick={handleChangePlayMode}
             ></button>
             <button className="btn sprite_playbar playlist"></button>
           </div>
@@ -204,7 +241,7 @@ const AppPlayerBar: FC<IProps> = () => {
       <audio
         ref={audioRef}
         onTimeUpdate={handleTimeUpdate}
-        // onEnded={handleTimeEnded}
+        onEnded={handleTimeEnded}
       />
     </PlayerBarWrapper>
   )

@@ -1,7 +1,6 @@
 import React, { useState, ReactNode, FC, memo } from 'react'
 import { shallowEqualMusic, useMusicSelector } from '@/store'
 import { Carousel } from 'antd'
-import classNames from 'classnames'
 
 import User from '../user'
 import {

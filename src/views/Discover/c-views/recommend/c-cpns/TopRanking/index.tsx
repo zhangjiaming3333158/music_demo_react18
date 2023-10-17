@@ -5,7 +5,6 @@ import type { ColumnsType } from 'antd/es/table'
 import { useMusicSelector, shallowEqualMusic } from '@/store'
 import AreaHeaderV1 from '@/components/area-header-v1'
 import TopRankColHeader from '@/components/top-rank-col-header'
-import topTankColBody from '@/components/top-tank-col-body'
 import { TopRankingWrapper } from './style'
 import TopTankColBody from '@/components/top-tank-col-body'
 
