@@ -1,15 +1,27 @@
-import { ReactNode, FC, memo } from 'react'
+import { ReactNode, FC, memo, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Input } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
-
 import routes from '@/router'
+import { useMusicDispatch, useMusicSelector, shallowEqualMusic } from '@/store'
+import { changeTheme } from '@/store/modules/theme'
+import IconSun, { IconMoon } from '@/assets/icon/icon'
 import { HeaderLeft, HeaderRight, HeaderWrapper } from './style'
 
 interface IProps {
   children?: ReactNode
 }
 const AppHeader: FC<IProps> = () => {
+  const dispatch = useMusicDispatch()
+  function changeMode() {
+    dispatch(changeTheme())
+  }
+  const { mode } = useMusicSelector(
+    (state: any) => ({
+      mode: state.theme.mode,
+    }),
+    shallowEqualMusic,
+  )
   return (
     <HeaderWrapper>
       <div className="content wrap-v1">
@@ -36,8 +48,10 @@ const AppHeader: FC<IProps> = () => {
             placeholder="音乐/视频/播客"
             prefix={<SearchOutlined />}
           />
-          <span className="center">创作者中心</span>
           <span className="login">登录</span>
+          <button className="center" onClick={changeMode}>
+            {mode === 'light' ? <IconSun /> : <IconMoon />}
+          </button>
         </HeaderRight>
       </div>
       <div className="divider"></div>

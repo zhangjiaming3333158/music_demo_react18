@@ -6,15 +6,15 @@ import {
   shallowEqual
 } from 'react-redux'
 
-import counterReducer from './count';// 从 src/store/count.ts 导入 reducer
 import recommendReducer from './modules/recommend';
 import playerReducer from './modules/player';
+import themeReducer from './modules/theme';
 
 const store = configureStore({
   reducer: {
-    count: counterReducer,// 将 countReducer 作为 count slice 的 reducer
     recommend: recommendReducer,
     player: playerReducer,
+    theme: themeReducer
   },
 });
 

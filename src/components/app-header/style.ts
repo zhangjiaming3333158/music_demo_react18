@@ -82,6 +82,7 @@ export const HeaderRight = styled.div`
   font-size: 12px;
 
   > .search {
+    margin: 0 16px;
     width: 158px;
     height: 32px;
     border-radius: 16px;
@@ -93,20 +94,23 @@ export const HeaderRight = styled.div`
     }
   }
 
+  .login{
+    cursor: pointer;
+    color: #fff;
+  }
+
   .center {
-    width: 90px;
-    height: 32px;
-    line-height: 32px;
+    width: 30px;
+    height: 30px;
+    line-height: 40px;
     margin: 0 16px;
     text-align: center;
-    border: 1px solid #666;
     border-radius: 16px;
     color: #ccc;
     cursor: pointer;
 
-    :hover {
-      color: #fff;
-      border-color: #fff;
+    &:hover {
+      color: #000;
     }
   }
 `

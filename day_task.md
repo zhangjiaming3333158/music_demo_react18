@@ -1,5 +1,3 @@
-# 记录每节课的知识点
-
 ## 1.项目搭建
 
 ```
@@ -339,52 +337,11 @@ const components:React.FC<IProps>=()=>{
 
 ```tsx
 //router.tsx
-import React, { lazy } from 'react'
-import { createBrowserRouter } from 'react-router-dom'
-
-import ErrorPage from '@/views/Error'
-import App from '@/App'
 const Discover = lazy(() => import('@/views/Discover'))
 const Mine = lazy(() => import('@/views/Mine'))
 const Focus = lazy(() => import('@/views/Focus'))
 const Download = lazy(() => import('@/views/Download'))
 
-const routes = [
-  {
-    path: '/',
-    element: <App />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: '/',
-        element: <Discover />,
-        errorElement: <ErrorPage />,
-      },
-      {
-        path: 'discover',
-        element: <Discover />,
-        errorElement: <ErrorPage />,
-      },
-      {
-        path: 'download',
-        element: <Download />,
-        errorElement: <ErrorPage />,
-      },
-      {
-        path: 'focus',
-        element: <Focus />,
-        errorElement: <ErrorPage />,
-      },
-      {
-        path: 'mine',
-        element: <Mine />,
-        errorElement: <ErrorPage />,
-      },
-    ],
-  },
-]
-
-export default createBrowserRouter(routes)
 ```
 
 ```tsx
@@ -418,9 +375,8 @@ function App() {
 export default App
 ```
 
-## 11 discover页面子路由
 
-## 12-14 Redux状态管理配置
+## 11-15 Redux状态管理配置
 
 ### 12.1 安装
 

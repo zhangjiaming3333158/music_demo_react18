@@ -1,7 +1,5 @@
 import styled from 'styled-components'
-import progress_bar from '@/assets/img/progress_bar.png'
-import sprite_icon from '@/assets/img/sprite_icon.png'
-import pip_icon from '@/assets/img/pip_icon.png'
+import theme from '@/assets/theme'
 
 export const PlayerBarWrapper = styled.div`
   position: fixed;
@@ -11,10 +9,28 @@ export const PlayerBarWrapper = styled.div`
   bottom: 0;
   height: 60px;
   width: 100%;
-  background-color: #fafafa;
+  background-color: ${theme.color.play};
   box-shadow: 0 0 10px #ccc;
-  /* background-position: 0 0; */
-  /* background-repeat: repeat; */
+
+  .bar {
+    position: relative;
+    margin-top: -10px;
+    height: 10px;
+    background-color: ${theme.color.play};
+    .ant-slider {
+      position: relative;
+      top: -3px;
+      width: 980px;
+      .ant-slider-handle {
+        width: 22px;
+        height: 24px;
+        border: none;
+      }
+    }
+    .trackHoverBg {
+      height: 9px;
+    }
+  }
 
   .content {
     display: flex;
@@ -28,31 +44,15 @@ export const PlayerBarWrapper = styled.div`
   }
 `
 
-export const BarControl = styled.div`
-  display: flex;
-  align-items: center;
-
-  .btn {
-    cursor: pointer;
-    background-color: #fafafa;
-  }
-
-  .left {
-    margin-right: 10px;
-  }
-
-  .right {
-    margin-left: 10px;
-  }
-`
 export const BarPlayerInfo = styled.div`
+  flex: 1;
   display: flex;
   width: 642px;
   align-items: center;
 
   .image {
-    width: 34px;
-    height: 34px;
+    width: 40px;
+    height: 40px;
     border-radius: 5px;
   }
 
@@ -64,8 +64,9 @@ export const BarPlayerInfo = styled.div`
     .song {
       color: #e1e1e1;
       position: relative;
-      top: 8px;
+      top: 0;
       left: 8px;
+      font-size: 14px;
 
       .singer-name {
         color: #a1a1a1;
@@ -77,34 +78,12 @@ export const BarPlayerInfo = styled.div`
       display: flex;
       align-items: center;
 
-      .ant-slider {
-        position: relative;
-        top: -3px;
-        width: 493px;
-        margin-right: 10px;
-
-        .ant-slider-rail {
-          height: 9px;
-          background: url(${progress_bar}) right 0;
-        }
-
-        .ant-slider-track {
-          height: 9px;
-          background: url(${progress_bar}) left -66px;
-        }
-
-        .ant-slider-handle {
-          width: 22px;
-          height: 24px;
-          border: none;
-          margin-top: -7px;
-          background: url(${sprite_icon}) 0 -250px;
-        }
-      }
-
       .time {
+        margin-top: 10px;
+        margin-left: 8px;
+        font-size: 14px;
         .current {
-          color: #e1e1e1;
+          color: #a1a1a1;
         }
         .divider {
           margin: 0 3px;
@@ -114,49 +93,62 @@ export const BarPlayerInfo = styled.div`
   }
 `
 
+export const BarControl = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .btn {
+    cursor: pointer;
+    background-color: ${theme.color.play};
+  }
+
+  .left {
+    margin-right: 10px;
+  }
+
+  .right {
+    margin-left: 10px;
+  }
+`
+
 interface IBarOperator {
   $playmode: number
 }
 export const BarOperator = styled.div<IBarOperator>`
+  flex: 1;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   position: relative;
   top: 3px;
 
   .btn {
     width: 25px;
     height: 25px;
-  }
-
-  .left {
-    display: flex;
-    align-items: center;
-  }
-
-  .pip {
-    /* background: url(${pip_icon}); */
-  }
-
-  .favor {
-    background-position: -88px -163px;
-  }
-
-  .share {
-    background-position: -114px -163px;
+    background-color: ${theme.color.play};
   }
 
   .right {
+    position: relative;
     display: flex;
     align-items: center;
-    width: 126px;
     padding-left: 13px;
     background-position: -147px -248px;
-
-    .volume {
-      background-position: -2px -248px;
+    .sliderVolume {
+      position: absolute;
+      padding-bottom: 15px;
+      bottom: 25px;
+      left: 13px;
+      height: 100px;
+      width: 28px;
+      background-color: ${theme.color.play};
+      box-shadow: 0 0 10px #ccc;
     }
 
     .loop {
+      margin: 0 10px 0 15px;
       background-position: ${(props) => {
         switch (props.$playmode) {
           case 1:
@@ -167,14 +159,6 @@ export const BarOperator = styled.div<IBarOperator>`
             return '-3px -344px'
         }
       }};
-    }
-
-    .playlist {
-      padding-left: 18px;
-      text-align: center;
-      color: #ccc;
-      width: 59px;
-      background-position: -42px -68px;
     }
   }
 `

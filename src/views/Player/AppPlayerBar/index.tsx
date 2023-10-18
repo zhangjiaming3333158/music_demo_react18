@@ -19,8 +19,12 @@ import {
   RightCircleTwoTone,
   PlayCircleTwoTone,
   PauseCircleTwoTone,
+  HeartTwoTone,
+  RocketTwoTone,
+  SoundTwoTone,
+  ProfileTwoTone,
 } from '@ant-design/icons'
-import { Slider, message } from 'antd'
+import { Slider, message, ConfigProvider } from 'antd'
 import { formatTime, getImageSize } from '@/utils/format'
 import { getSongPlayUrl } from '@/utils/handle-player'
 
@@ -29,11 +33,14 @@ interface IProps {
 }
 const AppPlayerBar: FC<IProps> = () => {
   /** 组件内部定义的数据 */
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [progress, setProgress] = useState(0)
-  const [duration, setDuration] = useState(0)
-  const [currentTime, setCurrentTime] = useState(0)
-  const [isSliding, setIsSliding] = useState(false)
+  const [volume, setVolume] = useState(1) //音量[0-100]
+  const [showVolumeSlider, setShowVolumeSlider] = useState(false) //是否展示音量
+  const [openLyric, setOpenLyric] = useState(true) //是否展示歌词
+  const [isPlaying, setIsPlaying] = useState(false) //是否播放
+  const [progress, setProgress] = useState(0) //进度条
+  const [duration, setDuration] = useState(0) //总时长
+  const [currentTime, setCurrentTime] = useState(0) //当前播放时间
+  const [isSliding, setIsSliding] = useState(false) //是否处于拖拽状态
   const audioRef = useRef<HTMLAudioElement>(null)
 
   /** 发起action(获取数据) */
@@ -149,6 +156,11 @@ const AppPlayerBar: FC<IProps> = () => {
     setCurrentTime(currentTime)
   }
 
+  function handleVolumeChanging(value: number) {
+    setVolume(value)
+    audioRef.current!.volume = value / 100
+  }
+
   function handleSliderChanged(value: number) {
     // 1.获取点击位置的时间
     const currentTime = (value / 100) * duration
@@ -161,11 +173,90 @@ const AppPlayerBar: FC<IProps> = () => {
     setProgress(value)
     setIsSliding(false)
   }
+
+  //展示歌词
+  function handleLyricOpen() {
+    setOpenLyric(!openLyric)
+    if (openLyric) {
+      message.destroy('lyric')
+    } else {
+      message.open({
+        content: lyrics[lyricIndex].text,
+        key: 'lyric',
+        duration: 0,
+      })
+    }
+  }
+  //展示音量
+  function showVolume() {
+    setShowVolumeSlider(true)
+  }
+  //隐藏音量
+  function hideVolume() {
+    setShowVolumeSlider(false)
+  }
   return (
-    // className="sprite_playbar"
     <PlayerBarWrapper>
+      <div className="bar wrap-v2">
+        {/* Slider组件 */}
+        <ConfigProvider
+          theme={{
+            components: {
+              Slider: {
+                controlSize: 10,
+                dotActiveBorderColor: '#c3473a',
+                dotBorderColor: '#c3473a',
+                handleActiveColor: '#c3473a',
+                handleColor: '#c3473a',
+                railSize: 2,
+                trackBg: '#c3473a',
+                trackHoverBg: '#c3473a',
+              },
+            },
+          }}
+        >
+          <Slider
+            step={0.5}
+            value={progress}
+            tooltip={{ formatter: null }}
+            onChange={handleSliderChanging}
+            onAfterChange={handleSliderChanged}
+          />
+        </ConfigProvider>
+      </div>
       <div className="content wrap-v2">
+        <BarPlayerInfo>
+          <Link to="/player">
+            <img
+              className="image"
+              src={getImageSize(currentSong?.al?.picUrl, 50)}
+              alt=""
+            />
+          </Link>
+          <div className="info">
+            <div className="song">
+              <span className="song-name">{currentSong.name}</span>
+              <span className="singer-name">{currentSong?.ar?.[0]?.name}</span>
+            </div>
+            <div className="progress">
+              <div className="time">
+                <span className="current">{formatTime(currentTime)}</span>
+                <span className="divider">/</span>
+                <span className="duration">{formatTime(duration)}</span>
+              </div>
+            </div>
+          </div>
+        </BarPlayerInfo>
         <BarControl>
+          <button className="btn">
+            <HeartTwoTone
+              style={{
+                marginRight: 10,
+                fontSize: 20,
+              }}
+              twoToneColor="#c3473a"
+            />
+          </button>
           <button className="btn left" onClick={() => handleChangeMusic(false)}>
             <LeftCircleTwoTone
               style={{ fontSize: '26px' }}
@@ -191,50 +282,86 @@ const AppPlayerBar: FC<IProps> = () => {
               twoToneColor="#c3473a"
             />
           </button>
-        </BarControl>
-        <BarPlayerInfo>
-          <Link to="/player">
-            <img
-              className="image"
-              src={getImageSize(currentSong?.al?.picUrl, 50)}
-              alt=""
+          <button className="btn">
+            <RocketTwoTone
+              style={{
+                marginLeft: 10,
+                fontSize: 20,
+              }}
+              twoToneColor="#c3473a"
             />
-          </Link>
-          <div className="info">
-            <div className="song">
-              <span className="song-name">{currentSong.name}</span>
-              <span className="singer-name">{currentSong?.ar?.[0]?.name}</span>
-            </div>
-            <div className="progress">
-              {/* Slider组件 */}
-              <Slider
-                step={0.5}
-                value={progress}
-                tooltip={{ formatter: null }}
-                onChange={handleSliderChanging}
-                onAfterChange={handleSliderChanged}
-              />
-              <div className="time">
-                <span className="current">{formatTime(currentTime)}</span>
-                <span className="divider">/</span>
-                <span className="duration">{formatTime(duration)}</span>
-              </div>
-            </div>
-          </div>
-        </BarPlayerInfo>
+          </button>
+        </BarControl>
         <BarOperator $playmode={playMode}>
-          <div className="left">
-            <button className="btn pip"></button>
-            <button className="btn sprite_playbar favor"></button>
-            <button className="btn sprite_playbar share"></button>
-          </div>
           <div className="right sprite_playbar">
-            <button className="btn sprite_playbar volume"></button>
+            <button
+              className="btn"
+              onMouseEnter={showVolume}
+              onMouseLeave={hideVolume}
+            >
+              <div
+                className="sliderVolume"
+                style={{ display: showVolumeSlider ? 'block' : 'none' }}
+              >
+                <ConfigProvider
+                  theme={{
+                    components: {
+                      Slider: {
+                        controlSize: 10,
+                        dotActiveBorderColor: '#c3473a',
+                        dotBorderColor: '#c3473a',
+                        handleActiveColor: '#c3473a',
+                        handleColor: '#c3473a',
+                        railSize: 2,
+                        trackBg: '#c3473a',
+                        trackHoverBg: '#c3473a',
+                      },
+                    },
+                  }}
+                >
+                  <Slider
+                    vertical
+                    defaultValue={1}
+                    value={volume}
+                    onChange={handleVolumeChanging}
+                  />
+                </ConfigProvider>
+              </div>
+              <SoundTwoTone
+                style={{
+                  marginRight: 15,
+                  fontSize: 20,
+                  // height: 150,
+                }}
+                twoToneColor="#c3473a"
+              />
+            </button>
             <button
               className="btn sprite_playbar loop"
               onClick={handleChangePlayMode}
             ></button>
-            <button className="btn sprite_playbar playlist"></button>
+            <button className="btn">
+              <ProfileTwoTone
+                style={{
+                  fontSize: 20,
+                }}
+                twoToneColor="#c3473a"
+              />
+            </button>
+            <button
+              className="btn"
+              style={{ fontSize: 20, marginLeft: 10 }}
+              onClick={handleLyricOpen}
+            >
+              <p
+                style={{
+                  marginTop: -2,
+                  color: openLyric ? '#c3473a' : '#a1a1a1',
+                }}
+              >
+                词
+              </p>
+            </button>
           </div>
         </BarOperator>
       </div>

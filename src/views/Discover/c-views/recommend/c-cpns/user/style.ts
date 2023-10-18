@@ -8,7 +8,7 @@ export const UserWrapper = styled.div`
   justify-content: space-between;
   font-size: 12px;
   padding: 10px 22.5px;
-  background-color: #eeeeee30;
+  /* background-color: #eeeeee; */
   backdrop-filter: blur(500px);
   color: #eee;
   .title {
