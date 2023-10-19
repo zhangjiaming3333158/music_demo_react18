@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const NavWrapper = styled.div`
   height: 30px;
-  background-color: ${(props) => props.theme.color.primary};
+  background-color: #c20c0c;
 
   .nav {
     margin: 0 auto;

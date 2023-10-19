@@ -36,8 +36,7 @@ export const AlbumItemWrapper = styled.div`
       overflow: hidden; //超出部分隐藏
       text-overflow: ellipsis; //文本溢出显示省略号
       height: 20px;
-      color: #000;
-      ${(props) => props.theme.mixin.textNowrap}
+      color: ${({ theme }) => theme.palette.color.default};
     }
 
     .artist {
@@ -45,8 +44,7 @@ export const AlbumItemWrapper = styled.div`
       overflow: hidden; //超出部分隐藏
       text-overflow: ellipsis; //文本溢出显示省略号
       height: 20px;
-      color: #666;
-      ${(props) => props.theme.mixin.textNowrap}
+      color: ${({ theme }) => theme.palette.color.secondary};
     }
   }
 `

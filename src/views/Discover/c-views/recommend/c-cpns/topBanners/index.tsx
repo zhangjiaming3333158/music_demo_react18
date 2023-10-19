@@ -64,24 +64,6 @@ const TopBanners: FC<IProps> = () => {
               )
             })}
           </Carousel>
-          {/* <ul className="dots">
-            {banners.map(
-              (
-                item: { imageUrl: string; typeTitle: string },
-                index: number,
-              ) => {
-                return (
-                  <li key={item.imageUrl}>
-                    <span
-                      className={classNames('item', {
-                        active: index === currentIndex,
-                      })}
-                    ></span>
-                  </li>
-                )
-              },
-            )}
-          </ul> */}
         </BannerLeft>
         <BannerRight>
           <User />

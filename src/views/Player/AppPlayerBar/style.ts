@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import theme from '@/assets/theme'
+// import theme from '@/assets/theme'
 
 export const PlayerBarWrapper = styled.div`
   position: fixed;
@@ -9,14 +9,14 @@ export const PlayerBarWrapper = styled.div`
   bottom: 0;
   height: 60px;
   width: 100%;
-  background-color: ${theme.color.play};
+  background-color: ${(props)=>props.theme.palette.background.paper};
   box-shadow: 0 0 10px #ccc;
 
   .bar {
     position: relative;
     margin-top: -10px;
     height: 10px;
-    background-color: ${theme.color.play};
+    background-color: ${(props)=>props.theme.palette.background.paper};
     .ant-slider {
       position: relative;
       top: -3px;
@@ -101,7 +101,7 @@ export const BarControl = styled.div`
 
   .btn {
     cursor: pointer;
-    background-color: ${theme.color.play};
+    background-color: ${(props)=>props.theme.palette.background.paper};
   }
 
   .left {
@@ -127,7 +127,7 @@ export const BarOperator = styled.div<IBarOperator>`
   .btn {
     width: 25px;
     height: 25px;
-    background-color: ${theme.color.play};
+    background-color: ${(props)=>props.theme.palette.background.paper};
   }
 
   .right {
@@ -138,12 +138,12 @@ export const BarOperator = styled.div<IBarOperator>`
     background-position: -147px -248px;
     .sliderVolume {
       position: absolute;
-      padding-bottom: 15px;
+      padding: 15px 5px 20px 5px;
       bottom: 25px;
       left: 13px;
       height: 100px;
       width: 28px;
-      background-color: ${theme.color.play};
+      background-color: ${(props)=>props.theme.palette.background.paper};
       box-shadow: 0 0 10px #ccc;
     }
 

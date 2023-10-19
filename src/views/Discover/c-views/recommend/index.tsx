@@ -35,7 +35,8 @@ const recommend: FC<IProps> = () => {
   return (
     <RecommendWrapper>
       <TopBanner />
-      <div className="content wrap-v2">
+      {/* <div className="contaienr"> */}
+      <div className="content">
         <div className="left">
           <HotRecommend />
           <NewAlbum />
@@ -46,6 +47,7 @@ const recommend: FC<IProps> = () => {
           <HotAnchor />
         </div>
       </div>
+      {/* </div> */}
     </RecommendWrapper>
   )
 }

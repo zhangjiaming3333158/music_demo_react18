@@ -17,7 +17,11 @@ interface IRecommendState {
   banners: []
   recommendSongs: []
   recommendSongList: []
-  rankings: []
+  rankings: [
+    { playlist: { tracks: [name: any]; coverImgUrl: any; name: any } },
+    { playlist: { tracks: [name: any]; coverImgUrl: any; name: any } },
+    { playlist: { tracks: [name: any]; coverImgUrl: any; name: any } },
+  ]
   topList: []
 }
 
@@ -28,7 +32,29 @@ const initialState: IRecommendState = {
   banners: [],
   recommendSongs: [],
   recommendSongList: [],
-  rankings: [],
+  rankings: [
+    {
+      playlist: {
+        tracks: [{ name: '' }],
+        coverImgUrl: '',
+        name: '',
+      },
+    },
+    {
+      playlist: {
+        tracks: [{ name: '' }],
+        coverImgUrl: '',
+        name: '',
+      },
+    },
+    {
+      playlist: {
+        tracks: [{ name: '' }],
+        coverImgUrl: '',
+        name: '',
+      },
+    },
+  ],
   topList: [],
 }
 

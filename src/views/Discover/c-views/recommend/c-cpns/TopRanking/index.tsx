@@ -125,6 +125,7 @@ const TopRanking: FC<IProps> = () => {
         title={<AreaHeaderV1 title="榜单" moreLink="/discover/ranking" />}
         bordered={false}
         style={{ width: 709, marginTop: 20 }}
+        className='card'
       >
         <Table
           rowClassName={(_) => {
@@ -135,6 +136,7 @@ const TopRanking: FC<IProps> = () => {
           dataSource={header}
           pagination={false}
           showHeader={false}
+          headerBorderRadius={['10px 10px 0 0', '10px 10px 0 0']}
         />
         <Table
           rowClassName={(_, index) => {

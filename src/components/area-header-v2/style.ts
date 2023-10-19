@@ -8,5 +8,14 @@ export const HeaderV2Wrapper = styled.div`
   h3 {
     font-size: 15px;
     font-weight: 700;
+    color: ${({ theme }) => theme.palette.color.middle};
+  }
+
+  a{
+    color: ${({ theme }) => theme.palette.color.middle};
+    &:hover{
+      text-decoration: none;
+      color: ${({ theme }) => theme.palette.color.default};
+    }
   }
 `

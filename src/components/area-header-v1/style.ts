@@ -2,7 +2,6 @@ import styled from 'styled-components'
 
 export const HeaderV1Wrapper = styled.div`
   height: 33px;
-  /* border-bottom: 2px solid #c10d0c; */
   padding: 0 10px 0 0;
   background-position: -225px -156px;
 
@@ -18,6 +17,7 @@ export const HeaderV1Wrapper = styled.div`
       font-size: 20px;
       font-family: 'Microsoft Yahei', Arial, Helvetica, sans-serif;
       margin-right: 20px;
+      color: ${({ theme }) => theme.palette.color.middle};
     }
 
     .keywords {
@@ -30,9 +30,9 @@ export const HeaderV1Wrapper = styled.div`
 
         .link {
           font-size: 12px;
-          color: #666;
+          color: ${({ theme }) => theme.palette.color.secondary};
           &:hover {
-            color: #333;
+            color: ${({ theme }) => theme.palette.color.default};
             cursor: pointer;
             text-decoration: underline;
           }
@@ -40,7 +40,7 @@ export const HeaderV1Wrapper = styled.div`
 
         .divider {
           margin: 0 15px;
-          color: #ccc;
+          color: ${({ theme }) => theme.palette.color.secondary};
         }
 
         &:last-child {
@@ -56,9 +56,10 @@ export const HeaderV1Wrapper = styled.div`
     display: flex;
     align-items: center;
     .more {
+      color: ${({ theme }) => theme.palette.color.secondary};
       &:hover {
-        text-decoration: underline;
-        color: #333;
+        text-decoration: none;
+        color: ${({ theme }) => theme.palette.color.default};
       }
     }
 

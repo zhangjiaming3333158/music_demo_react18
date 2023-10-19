@@ -10,6 +10,19 @@ export const TopRankingWrapper = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
+    .span3 {
+      color: #c10d0c;
+    }
+
+    .span10 {
+      color: ${({ theme }) => theme.palette.color.middle};
+    }
+
+    a {
+      margin-left: 10px;
+      color: ${({ theme }) => theme.palette.color.middle};
+    }
   }
   .right {
     display: flex;

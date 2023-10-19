@@ -12,6 +12,7 @@
 - `react-redux`：帮助我们链及`redux`、`react`的辅助工具
 - `redux-thunk`: 在`redux`中进行异步请求
 - `propType`: 校验`props`类型及默认值
+- `mui`: 统一theme样式，实现白天和夜间模式
 - 项目中的优化: 函数式组件全部采用`memo`、路由懒加载、函数防抖
 
 ### 后端

@@ -13,7 +13,7 @@ export const HeaderWrapper = styled.div`
 
   .divider {
     height: 5px;
-    background-color: ${(props) => props.theme.color.primary};
+    background-color: #c20c0c;
   }
 `
 
@@ -22,6 +22,7 @@ export const HeaderLeft = styled.div`
 
   .logo {
     display: block;
+    padding: 0 0 0 20px;
     width: 176px;
     height: 70px;
     background-position: 0 0;
@@ -94,7 +95,7 @@ export const HeaderRight = styled.div`
     }
   }
 
-  .login{
+  .login {
     cursor: pointer;
     color: #fff;
   }

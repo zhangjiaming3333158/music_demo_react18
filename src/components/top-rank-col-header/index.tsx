@@ -20,6 +20,7 @@ const TopRankColHeader: FC<IProps> = (props) => {
               width: 80,
               boxShadow: '0 4px 10px rgba(0, 0, 0, 0.5)',
             }}
+            className='image'
           />
         </div>
         <div
@@ -31,7 +32,7 @@ const TopRankColHeader: FC<IProps> = (props) => {
             flexDirection: 'column',
           }}
         >
-          <div style={{ fontWeight: 900 }}>{textValue[1]}</div>
+          <div style={{ fontWeight: 900 }} className='name'>{textValue[1]}</div>
           <div style={{ marginLeft: 20 }}>
             <button className="sprite_02 btn play"></button>
             <button className="sprite_02 btn favor"></button>

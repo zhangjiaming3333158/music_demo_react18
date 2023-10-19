@@ -1,4 +1,4 @@
-import { memo, useState, useMemo } from 'react'
+import { memo } from 'react'
 import type { ReactNode, FC } from 'react'
 import { TopRankingWrapper } from './style'
 
@@ -11,15 +11,8 @@ const TopRankColBody: FC<IProps> = (props) => {
   return (
     <TopRankingWrapper>
       <div className="left">
-        <span
-          style={{
-            color: text[1] >= 1 && text[1] <= 3 ? '#c10d0c' : 'inherit',
-          }}
-        >
-          {text[1]}
-        </span>
+        <span className={text[1] <= 3 ? 'span3' : 'span10'}>{text[1]}</span>
         <a
-          style={{ color: '#000', marginLeft: 10 }}
           href={text[1] === null ? '#/discover/ranking' : undefined}
         >
           {text[0]}

@@ -1,5 +1,11 @@
 import styled from 'styled-components'
 
+export const CardWrapper = styled.div`
+  .card {
+    background-color: ${({ theme }) => theme.palette.background.paper};
+  }
+`
+
 export const AnchorWrapper = styled.div`
   .artists {
     margin-left: -15px;
@@ -7,12 +13,14 @@ export const AnchorWrapper = styled.div`
     .item {
       display: flex;
       height: 65px;
-      margin-bottom: 20px;
-      background-color: #fafafa;
+      margin-bottom: 18px;
+      border: 1px solid ${({ theme }) => theme.palette.background.border};
+      background-color: ${({ theme }) => theme.palette.background.paper};
       text-decoration: none;
 
-      :hover {
-        background-color: #f4f4f4;
+      :hover,
+      .rank {
+        background-color: ${({ theme }) => theme.palette.background.hover};
       }
 
       .rank {
@@ -20,15 +28,14 @@ export const AnchorWrapper = styled.div`
         font-size: 16px;
         text-align: center;
         line-height: 65px;
-        background-color: #fff;
+        background-color: ${({ theme }) => theme.palette.background.paper};
+        color: ${({ theme }) => theme.palette.color.default};
       }
 
       img {
-        width: 62px;
-        height: 62px;
-        border-top-left-radius: 5px;
-        border-bottom-left-radius: 5px;
-        /* object-fit: cover; */
+        width: 63px;
+        height: 63px;
+        border-radius: 5px;
       }
 
       .info {
@@ -37,7 +44,7 @@ export const AnchorWrapper = styled.div`
         flex-direction: column;
         justify-content: space-around;
         padding: 3px 12px;
-        border: 1px solid #e9e9e9;
+
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
         border-left: none;
@@ -46,7 +53,7 @@ export const AnchorWrapper = styled.div`
         .name {
           font-size: 14px;
           font-weight: 700;
-          color: #000;
+          color: ${({ theme }) => theme.palette.color.secondary};
           white-space: nowrap;
           text-overflow: ellipsis;
           overflow: hidden;
@@ -54,7 +61,7 @@ export const AnchorWrapper = styled.div`
 
         .alia {
           font-size: 12px;
-          color: #666;
+          color: ${({ theme }) => theme.palette.color.secondary};
         }
       }
     }

@@ -66,7 +66,7 @@ export const MenuItemWrapper = styled.div`
 
   .bottom {
     font-size: 14px;
-    color: #000;
+    color: ${({ theme }) => theme.palette.color.middle};
     margin-top: 5px;
   }
 `

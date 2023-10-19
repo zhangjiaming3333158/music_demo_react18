@@ -4,7 +4,7 @@ import { Card, Carousel } from 'antd'
 import { shallowEqualMusic, useMusicSelector } from '@/store'
 import AreaHeaderV1 from '@/components/area-header-v1'
 import NewAlbumItem from '@/components/new-album-item'
-import { AlbumWrapper } from './style'
+import { AlbumWrapper, CardWrapper } from './style'
 
 interface IProps {
   children?: ReactNode
@@ -31,45 +31,48 @@ const NewAblum: FC<IProps> = () => {
     list.push(i)
   }
   return (
-    <Card
-      title={<AreaHeaderV1 title="新碟上架" moreLink="/discover/album" />}
-      bordered={false}
-      style={{ width: 709, marginTop: 20 }}
-    >
-      <Carousel afterChange={onChange}>
-        <AlbumWrapper>
-          <div className="content">
-            <button
-              className="sprite_02 arrow arrow-left"
-              onClick={handlePrevClick}
-            ></button>
-            <div className="banner">
-              <Carousel ref={bannerRef} dots={false} speed={1500}>
-                {list.map((item) => {
-                  return (
-                    <div key={item}>
-                      <div className="album-list">
-                        {recommendSongList
-                          .slice(item * 4, (item + 1) * 4)
-                          .map((album: any) => {
-                            return (
-                              <NewAlbumItem key={album.id} itemData={album} />
-                            )
-                          })}
+    <CardWrapper>
+      <Card
+        title={<AreaHeaderV1 title="新碟上架" moreLink="/discover/album" />}
+        bordered={false}
+        style={{ width: 709, marginTop: 20 }}
+        className='card'
+      >
+        <Carousel afterChange={onChange}>
+          <AlbumWrapper>
+            <div className="content">
+              <button
+                className="sprite_02 arrow arrow-left"
+                onClick={handlePrevClick}
+              ></button>
+              <div className="banner">
+                <Carousel ref={bannerRef} dots={false} speed={1500}>
+                  {list.map((item) => {
+                    return (
+                      <div key={item}>
+                        <div className="album-list">
+                          {recommendSongList
+                            .slice(item * 4, (item + 1) * 4)
+                            .map((album: any) => {
+                              return (
+                                <NewAlbumItem key={album.id} itemData={album} />
+                              )
+                            })}
+                        </div>
                       </div>
-                    </div>
-                  )
-                })}
-              </Carousel>
+                    )
+                  })}
+                </Carousel>
+              </div>
+              <button
+                className="sprite_02 arrow arrow-right"
+                onClick={handleNextClick}
+              ></button>
             </div>
-            <button
-              className="sprite_02 arrow arrow-right"
-              onClick={handleNextClick}
-            ></button>
-          </div>
-        </AlbumWrapper>
-      </Carousel>
-    </Card>
+          </AlbumWrapper>
+        </Carousel>
+      </Card>
+    </CardWrapper>
   )
 }
 

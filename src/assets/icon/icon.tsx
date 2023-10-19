@@ -8,7 +8,7 @@ const IconSun: FC<IProps> = () => {
   return (
     <span style={{ marginLeft: -1 }}>
       <svg
-        t="1697635654151"
+        // t="1697635654151"
         // class="icon"
         viewBox="0 0 1028 1024"
         version="1.1"
@@ -36,7 +36,7 @@ const IconMoon: FC<IProps> = () => {
   return (
     <span>
       <svg
-        t="1697635796541"
+        // t="1697635796541"
         // class="icon"
         viewBox="0 0 1024 1024"
         version="1.1"

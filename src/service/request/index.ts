@@ -4,7 +4,7 @@ import type { RequestInterceptors, RequestConfig } from './type'
 
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
-NProgress.configure({showSpinner: false});
+NProgress.configure({ showSpinner: false })
 
 class Request {
   instance: AxiosInstance
@@ -31,22 +31,18 @@ class Request {
     // 2.添加所有的实例都有的拦截器
     this.instance.interceptors.request.use(
       (config) => {
-        NProgress.start();
+        NProgress.start()
         return config
       },
       (err) => {
         return err
-      }
+      },
     )
 
     this.instance.interceptors.response.use(
       (res) => {
         NProgress.done()
-        // if (data.returnCode === '-1001') {
-        //   console.log('请求失败~, 错误信息')
-        // } else {
         return res.data
-        // }
       },
       (err) => {
         // 例子: 判断不同的HttpErrorCode显示不同的错误信息
@@ -54,7 +50,7 @@ class Request {
           console.log('404的错误~')
         }
         return err
-      }
+      },
     )
   }
 

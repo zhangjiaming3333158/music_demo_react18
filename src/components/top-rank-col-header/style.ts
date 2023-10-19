@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 
 export const TopRankingWrapper = styled.div`
+  .image {
+    box-shadow: '0 4px 10px rgba(0, 0, 0, 0.5)';
+  }
   .btn {
     display: inline-block;
     text-indent: -9999px;
@@ -8,6 +11,10 @@ export const TopRankingWrapper = styled.div`
     height: 22px;
     margin: 8px 10px 0 0;
     cursor: pointer;
+  }
+
+  .name{
+    color: ${({ theme }) => theme.palette.color.middle};
   }
 
   .play {

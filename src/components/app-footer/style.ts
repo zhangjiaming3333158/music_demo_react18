@@ -4,9 +4,9 @@ import sprite_footer_01 from '@/assets/img/sprite_footer_01.png'
 
 export const AppFooterWrapper = styled.div`
   height: 172px;
-  background-color: #f2f2f2;
-  color: #666;
-  border-top: 1px solid #d3d3d3;
+  background-color: ${({ theme }) => theme.palette.background.paper};
+  color: ${({ theme }) => theme.palette.color.middle};
+  border-top: 1px solid ${({ theme }) => theme.palette.background.border};
 
   .content {
     display: flex;
@@ -21,12 +21,12 @@ export const FooterLeft = styled.div`
 
   .link {
     a {
-      color: #999;
+      color: ${({ theme }) => theme.palette.color.middle};
     }
 
     .line {
       margin: 0 10px;
-      color: #999;
+      color: ${({ theme }) => theme.palette.color.secondary};
     }
   }
 
