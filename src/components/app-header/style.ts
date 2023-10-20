@@ -22,7 +22,6 @@ export const HeaderLeft = styled.div`
 
   .logo {
     display: block;
-    padding: 0 0 0 20px;
     width: 176px;
     height: 70px;
     background-position: 0 0;

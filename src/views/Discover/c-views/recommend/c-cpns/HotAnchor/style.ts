@@ -33,8 +33,8 @@ export const AnchorWrapper = styled.div`
       }
 
       img {
-        width: 63px;
-        height: 63px;
+        width: 65px;
+        height: 65px;
         border-radius: 5px;
       }
 
@@ -53,7 +53,7 @@ export const AnchorWrapper = styled.div`
         .name {
           font-size: 14px;
           font-weight: 700;
-          color: ${({ theme }) => theme.palette.color.secondary};
+          color: ${({ theme }) => theme.palette.color.default};
           white-space: nowrap;
           text-overflow: ellipsis;
           overflow: hidden;
@@ -61,7 +61,7 @@ export const AnchorWrapper = styled.div`
 
         .alia {
           font-size: 12px;
-          color: ${({ theme }) => theme.palette.color.secondary};
+          color: ${({ theme }) => theme.palette.color.default};
         }
       }
     }

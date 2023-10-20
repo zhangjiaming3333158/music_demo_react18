@@ -60,7 +60,7 @@ export const SingerWrapper = styled.div`
   .apply-for {
     margin-top: 15px;
     a {
-      color: ${({ theme }) => theme.palette.color.secondary};
+      color: ${({ theme }) => theme.palette.color.default};
       font-weight: 700;
       text-align: center;
       display: block;

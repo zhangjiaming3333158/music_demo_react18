@@ -1,12 +1,13 @@
 import { memo, useState, useEffect } from 'react'
 import type { ReactNode, FC } from 'react'
-import { Card, Table } from 'antd'
+import { Card, Table, ConfigProvider } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import { useMusicSelector, shallowEqualMusic } from '@/store'
 import AreaHeaderV1 from '@/components/area-header-v1'
 import TopRankColHeader from '@/components/top-rank-col-header'
 import { TopRankingWrapper } from './style'
 import TopTankColBody from '@/components/top-tank-col-body'
+
 
 interface IProps {
   children?: ReactNode
@@ -125,34 +126,44 @@ const TopRanking: FC<IProps> = () => {
         title={<AreaHeaderV1 title="榜单" moreLink="/discover/ranking" />}
         bordered={false}
         style={{ width: 709, marginTop: 20 }}
-        className='card'
+        className="card"
       >
-        <Table
-          rowClassName={(_) => {
-            return 'header'
+        <ConfigProvider
+          theme={{
+            components: {
+              Table: {
+                rowHoverBg: 'none',
+                borderColor: '#bbb',
+              },
+            },
           }}
-          bordered
-          columns={columnsHeader}
-          dataSource={header}
-          pagination={false}
-          showHeader={false}
-          headerBorderRadius={['10px 10px 0 0', '10px 10px 0 0']}
-        />
-        <Table
-          rowClassName={(_, index) => {
-            if (index % 2 === 1) {
-              return 'even'
-            } else {
-              return 'odd'
-            }
-          }}
-          size="small"
-          bordered
-          columns={columns}
-          dataSource={data}
-          pagination={false}
-          showHeader={false}
-        />
+        >
+          <Table
+            rowClassName={(_) => {
+              return 'header'
+            }}
+            bordered
+            columns={columnsHeader}
+            dataSource={header}
+            pagination={false}
+            showHeader={false}
+          />
+          <Table
+            rowClassName={(_, index) => {
+              if (index % 2 === 1) {
+                return 'even'
+              } else {
+                return 'odd'
+              }
+            }}
+            size="small"
+            bordered
+            columns={columns}
+            dataSource={data}
+            pagination={false}
+            showHeader={false}
+          />
+        </ConfigProvider>
       </Card>
     </TopRankingWrapper>
   )
