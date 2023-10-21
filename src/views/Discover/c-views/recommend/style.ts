@@ -12,12 +12,10 @@ export const RecommendWrapper = styled.div`
 
     > .left {
       margin: 20px 0 40px 0;
-      /* padding: 0 10px; */
       width: 729px;
     }
 
     > .right {
-      /* position: fixed; */
       margin: 20px 0 40px 0;
       width: 250px;
     }

@@ -4,7 +4,7 @@ import { useRoutes } from 'react-router-dom'
 import routes from './router'
 import AppFooter from './components/app-footer'
 import AppHeader from './components/app-header'
-import AppPlayerBar from './views/Player/AppPlayerBar'
+import Player from './views/Player'
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
           <div className="router">{useRoutes(routes)}</div>
         </Suspense>
       </div>
-      <AppPlayerBar />
+      <Player />
       <AppFooter />
     </div>
   )

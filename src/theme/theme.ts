@@ -55,6 +55,7 @@ const themes: Record<Themes, ThemeOptions> = {
       },
       primary: {
         main: '#C20C0C',
+        red:'#c3473a',
         base: '#000'
       }
     }
@@ -79,6 +80,7 @@ const themes: Record<Themes, ThemeOptions> = {
       },
       primary: {
         main: '#C20C0C',
+        red:'#c3473a',
         base: '#000'
       }
     }
