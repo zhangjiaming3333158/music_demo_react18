@@ -9,12 +9,14 @@ import {
 import recommendReducer from './modules/recommend';
 import playerReducer from './modules/player';
 import themeReducer from './modules/theme';
+import userReducer from './modules/user';
 
 const store = configureStore({
   reducer: {
     recommend: recommendReducer,
     player: playerReducer,
-    theme: themeReducer
+    theme: themeReducer,
+    user: userReducer,
   },
 });
 

@@ -1,6 +1,6 @@
 import { ReactNode, FC, memo } from 'react'
 import { useEffect } from 'react'
-import { useMusicDispatch } from '@/store'
+import { useMusicDispatch, useMusicSelector, shallowEqualMusic } from '@/store'
 import {
   fetchBannerDataAction,
   fetchRecommendSongsDataAction,
@@ -16,6 +16,7 @@ import TopRanking from './c-cpns/TopRanking'
 import NewAlbum from './c-cpns/NewAlbum'
 import SettleSinger from './c-cpns/SettleSinger'
 import HotAnchor from './c-cpns/HotAnchor'
+import Login from '@/components/app-login'
 import { RecommendWrapper } from './style'
 
 interface IProps {
@@ -32,10 +33,16 @@ const recommend: FC<IProps> = () => {
     dispatch(fetchArtistListDataAction())
     dispatch(fetchAnchorListDataAction())
   }, [])
+  /** 登录窗口 */
+  const { showLoginModal } = useMusicSelector(
+    (state) => ({
+      showLoginModal: state.user.showLoginModal,
+    }),
+    shallowEqualMusic,
+  )
   return (
     <RecommendWrapper>
       <TopBanner />
-      {/* <div className="contaienr"> */}
       <div className="content">
         <div className="left">
           <HotRecommend />
@@ -47,7 +54,7 @@ const recommend: FC<IProps> = () => {
           <HotAnchor />
         </div>
       </div>
-      {/* </div> */}
+      {showLoginModal ? <Login /> : null}
     </RecommendWrapper>
   )
 }

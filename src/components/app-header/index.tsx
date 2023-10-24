@@ -5,6 +5,7 @@ import { SearchOutlined } from '@ant-design/icons'
 import routes from '@/router'
 import { useMusicDispatch, useMusicSelector, shallowEqualMusic } from '@/store'
 import { changeTheme } from '@/store/modules/theme'
+import { setLoginModal } from '@/store/modules/user'
 import IconSun, { IconMoon } from '@/assets/icon/icon'
 import { HeaderLeft, HeaderRight, HeaderWrapper } from './style'
 
@@ -16,12 +17,24 @@ const AppHeader: FC<IProps> = () => {
   function changeMode() {
     dispatch(changeTheme())
   }
+  // 切换样式
   const { mode } = useMusicSelector(
     (state: any) => ({
       mode: state.theme.mode,
     }),
     shallowEqualMusic,
   )
+  // 是否登录
+  const { isLogin } = useMusicSelector(
+    (state: any) => ({
+      isLogin: state.user.isLogin,
+    }),
+    shallowEqualMusic,
+  )
+  //登录窗口
+  function Login() {
+    dispatch(setLoginModal())
+  }
   return (
     <HeaderWrapper>
       <div className="content wrap-v1">
@@ -48,7 +61,11 @@ const AppHeader: FC<IProps> = () => {
             placeholder="音乐/视频/播客"
             prefix={<SearchOutlined />}
           />
-          <span className="login">登录</span>
+          {isLogin ? null : (
+            <span className="login" onClick={Login}>
+              登录
+            </span>
+          )}
           <button className="center" onClick={changeMode}>
             {mode === 'light' ? <IconSun /> : <IconMoon />}
           </button>

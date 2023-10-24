@@ -46,7 +46,8 @@ const themes: Record<Themes, ThemeOptions> = {
         hover: '#f4f4f4',
         border: '#e9e9e9',
         even: '#f9f9f9',
-        odd: '#f4f2f2'
+        odd: '#f4f2f2',
+        login: '#f4f4f4'
       },
       color: {
         default: '#000',
@@ -71,7 +72,8 @@ const themes: Record<Themes, ThemeOptions> = {
         hover: '#333',
         border: '#333',
         even: '#242424',
-        odd: '#333'
+        odd: '#333',
+        login: '#3c3c3c'
       },
       color: {
         default: '#fff',
