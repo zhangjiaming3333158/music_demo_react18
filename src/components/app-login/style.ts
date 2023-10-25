@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 export const LoginWrapper = styled.div`
-  height: 400px;
-  width: 800px;
+  height: 350px;
+  width: 700px;
   position: fixed;
   top: 46%;
   left: 50%;
@@ -14,7 +14,6 @@ export const LoginWrapper = styled.div`
   .container {
     overflow: hidden;
     position: relative;
-    padding: 50px;
     box-sizing: border-box;
     width: 100%;
     height: 100%;
@@ -82,6 +81,11 @@ export const LoginDialogWrapper = styled.div`
       .top {
         display: flex;
         justify-content: center;
+        .active {
+          font-size: 1rem;
+          color: red;
+          border-bottom: 2px solid ${({ theme }) => theme.palette.color.primary};
+        }
       }
       .content {
         margin-top: 20px;

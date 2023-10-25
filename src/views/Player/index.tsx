@@ -347,11 +347,15 @@ const Player: FC<IProps> = () => {
               className="btn sprite_playbar loop"
               onClick={handleChangePlayMode}
             ></button>
-            <button className="btn" onClick={showSongList}>
-              <div className="songList" style={{ display: showSongListValue ? 'block' : 'none' }}>
+            <button className="btn">
+              <div
+                className="songList"
+                style={{ display: showSongListValue ? 'block' : 'none' }}
+              >
                 <SongList />
               </div>
               <ProfileTwoTone
+                onClick={showSongList}
                 style={{
                   fontSize: 20,
                 }}

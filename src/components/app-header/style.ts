@@ -83,7 +83,7 @@ export const HeaderRight = styled.div`
 
   > .search {
     margin: 0 16px;
-    width: 158px;
+    width: 251px;
     height: 32px;
     border-radius: 16px;
 

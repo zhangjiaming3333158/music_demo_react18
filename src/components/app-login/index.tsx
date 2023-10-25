@@ -4,12 +4,10 @@ import { LoginWrapper, LoginDialogWrapper } from './style'
 import { setLoginModal, setLoginData } from '@/store/modules/user'
 import { useMusicDispatch } from '@/store'
 import Button from '@mui/material/Button'
-// import Avatar from '@mui/material/Avatar'
-// import CircularProgress from '@mui/material/CircularProgress'
 import Divider from '@mui/material/Divider'
 import { TextField } from '@mui/material'
 import { message } from 'antd'
-import { phoneLogin } from '@/service/modules/login'
+import { phoneLogin, emailLogin } from '@/service/modules/login'
 
 interface IProps {
   children?: ReactNode
@@ -24,6 +22,14 @@ const Login: FC<IProps> = () => {
   const [messageApi, contextHolder] = message.useMessage() //登录提示
   const [account, setAccount] = useState('')
   const [password, setPassword] = useState('')
+  const [sectionLogin, setsectionLogin] = useState(true) //登录方式
+  //切换登录方式
+  const phoneLoginSection = () => {
+    setsectionLogin(true)
+  }
+  const emailLoginSection = () => {
+    setsectionLogin(false)
+  }
   // 账号
   const handleAccountChange = (event: any) => {
     setAccount(event.target.value)
@@ -34,7 +40,11 @@ const Login: FC<IProps> = () => {
   }
   // 登录
   const handleLoginClick = async () => {
-    let res = await phoneLogin(account, password)
+    if (sectionLogin) {
+      var res = await phoneLogin(account, password)
+    } else {
+      var res = await emailLogin(account, password)
+    }
     if (res.code !== 200 && res.code !== 400) {
       messageApi.open({
         type: 'error',
@@ -60,6 +70,7 @@ const Login: FC<IProps> = () => {
     }
     console.log(res)
   }
+
   return (
     <LoginWrapper>
       {contextHolder}
@@ -69,40 +80,26 @@ const Login: FC<IProps> = () => {
         </div>
         <LoginDialogWrapper>
           <div className="top-container">
-            <div className="left">
-              <span>扫描二维码登录</span>
-              <div className="code">
-                <img src="" alt="" />
-                {/* {nullObj(poilingData) ? (
-                  <div className="codeDrop">
-                    <Avatar
-                      className="avatar"
-                      src={poilingData?.avatarUrl}
-                      sx={{ width: 86, height: 86 }}
-                    />
-                    <CircularProgress
-                      size={100}
-                      sx={{
-                        position: 'absolute',
-                        top: 40,
-                        left: 40,
-                        zIndex: 1,
-                      }}
-                    />
-                  </div>
-                ) : null} */}
-              </div>
-              {/* <span>{poilingInfo}</span> */}
-            </div>
-            <Divider orientation="vertical" flexItem></Divider>
             <div className="right">
               <div className="top">
-                <span>手机登录</span>
+                <span
+                  onClick={phoneLoginSection}
+                  className={sectionLogin ? 'active' : ''}
+                >
+                  手机登录
+                </span>
+                <Divider orientation="vertical" flexItem></Divider>
+                <span
+                  onClick={emailLoginSection}
+                  className={!sectionLogin ? 'active' : ''}
+                >
+                  邮箱登录
+                </span>
               </div>
               <div className="content">
                 <TextField
                   fullWidth
-                  label="账号"
+                  label={sectionLogin ? '手机号' : '网易邮箱'}
                   variant="outlined"
                   size="small"
                   value={account}

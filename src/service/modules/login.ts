@@ -14,25 +14,35 @@ export function phoneLogin(phone: string, password: string) {
   })
 }
 
-export function getQrCode() {
-  return request.get({
-    url: `/login/qr/key?timestamp=${now()}`,
+export function emailLogin(email: string, password: string) {
+  return request.post({
+    url: `/login`,
+    params: {
+      email,
+      password,
+    },
   })
 }
 
-export function getQrBaseImg(params: any) {
-  return request.get({
-    url: `/login/qr/create?timestamp=${now()}`,
-    params,
-  })
-}
+// export function getQrCode() {
+//   return request.get({
+//     url: `/login/qr/key?timestamp=${now()}`,
+//   })
+// }
 
-export function getQrPoiling(params: any) {
-  return request.get({
-    url: `/login/qr/check?timestamp=${now()}`,
-    params,
-  })
-}
+// export function getQrBaseImg(params: any) {
+//   return request.get({
+//     url: `/login/qr/create?timestamp=${now()}`,
+//     params,
+//   })
+// }
+
+// export function getQrPoiling(params: any) {
+//   return request.get({
+//     url: `/login/qr/check?timestamp=${now()}`,
+//     params,
+//   })
+// }
 
 export function getUserInfo() {
   return request.get({

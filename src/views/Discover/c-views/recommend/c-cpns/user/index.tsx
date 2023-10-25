@@ -1,8 +1,9 @@
-import { memo } from 'react'
+import { memo, useEffect, useState } from 'react'
 import type { FC, ReactNode } from 'react'
-import { UserWrapper } from './style'
+import { UserWrapper, UserInfoWrapper } from './style'
 import { setLoginModal } from '@/store/modules/user'
 import { useMusicDispatch, useMusicSelector, shallowEqualMusic } from '@/store'
+import { fetchUserInfo } from '@/store/modules/user'
 import {
   PlayCircleFilled,
   MessageFilled,
@@ -10,6 +11,7 @@ import {
   ClockCircleFilled,
 } from '@ant-design/icons'
 import { Button } from 'antd'
+import { Avatar } from '@mui/material'
 interface IProps {
   children?: ReactNode
 }
@@ -29,6 +31,7 @@ const UserList = [
 ]
 const User: FC<IProps> = () => {
   const dispatch = useMusicDispatch()
+  const [userInfo, setUserInfo] = useState({} as any)
   // 登录窗口
   function Login() {
     dispatch(setLoginModal())
@@ -40,9 +43,29 @@ const User: FC<IProps> = () => {
     }),
     shallowEqualMusic,
   )
+  useEffect(() => {
+    dispatch(fetchUserInfo())
+    setUserInfo(JSON.parse(localStorage.getItem('userInfo') || '{}'))
+    console.log(userInfo)
+  }, [isLogin])
   return (
     <div style={{ width: '100%', height: '100%' }}>
-      {isLogin ? null : (
+      {isLogin ? (
+        <UserInfoWrapper>
+          <Avatar
+            className="avatar"
+            src={userInfo?.profile?.avatarUrl}
+            sx={{ width: 106, height: 106 }}
+          />
+          <span className="nickname">{userInfo?.profile?.nickname}</span>
+          <div className="other">
+            <div>
+              <h2> Lv{userInfo?.data?.level}</h2>
+              <span>等级</span>
+            </div>
+          </div>
+        </UserInfoWrapper>
+      ) : (
         <UserWrapper>
           <div className="title">
             登录网易云音乐，可以享受无限收藏的乐趣，并且无限同步到手机

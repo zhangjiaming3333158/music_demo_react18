@@ -43,33 +43,22 @@ export const UserWrapper = styled.div`
 //   gap: 30px;
 // `
 
-// export const UserInfoWrapper = styled.div`
-//   display: flex;
-//   width: 100%;
-//   /* justify-content: center; */
-//   flex-direction: column;
-//   align-items: center;
-//   gap: 20px;
-//   user-select: none;
-//   .avatar {
-//     border: 5px solid #eee;
-//   }
-//   .nickname {
-//     font-weight: bold;
-//     font-size: 18px;
-//   }
-//   .other {
-//     display: flex;
-//     gap: 30px;
-//     font-size: 13px;
-//     font-weight: bold;
-//     span {
-//       font-size: 12px;
-//     }
-//     div {
-//       display: flex;
-//       flex-direction: column;
-//       align-items: center;
-//     }
-//   }
-// `
+export const UserInfoWrapper = styled.div`
+  display: flex;
+  box-sizing: border-box;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  background-color: ${({ theme }) => theme.palette.background.login};
+  color: ${({ theme }) => theme.palette.color.middle};
+  .avatar {
+    border: 5px solid #eee;
+  }
+  .nickname {
+    font-weight: bold;
+    font-size: 18px;
+  }
+`
